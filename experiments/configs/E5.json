@@ -1,0 +1,14 @@
+{
+  "id": "E5",
+  "question": "What do slow workers cost?",
+  "tabs": [
+    10
+  ],
+  "killRates": [
+    0
+  ],
+  "slowFraction": 0.3,
+  "slowFactor": 3,
+  "epochs": 5,
+  "seeds": 3
+}

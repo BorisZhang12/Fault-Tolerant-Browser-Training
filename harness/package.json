@@ -1,0 +1,13 @@
+{
+  "name": "browser-train-harness",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "experiment": "tsx src/run.ts"
+  },
+  "devDependencies": {
+    "playwright": "^1.48.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}

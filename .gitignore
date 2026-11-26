@@ -1,0 +1,18 @@
+# Run logs (commit only runs used in the README with: git add -f runs/<id>)
+runs/*
+!runs/.gitkeep
+# Data
+data/
+*.idx*-ubyte*
+# Node
+node_modules/
+dist/
+# Go
+coordinator/bin/
+# Python
+__pycache__/
+.venv/
+# Playwright
+test-results/
+playwright-report/
+.DS_Store

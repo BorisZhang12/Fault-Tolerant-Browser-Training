@@ -1,0 +1,15 @@
+{
+  "id": "E2",
+  "question": "Do more tabs train faster?",
+  "tabs": [
+    1,
+    5,
+    10,
+    20
+  ],
+  "killRates": [
+    0
+  ],
+  "epochs": 5,
+  "seeds": 3
+}

@@ -1,0 +1,16 @@
+{
+  "id": "E4",
+  "question": "Drop or down-weight stale updates?",
+  "tabs": [
+    10
+  ],
+  "killRates": [
+    0.3
+  ],
+  "strategies": [
+    "drop",
+    "down-weight"
+  ],
+  "epochs": 5,
+  "seeds": 3
+}

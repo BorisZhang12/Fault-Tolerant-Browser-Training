@@ -1,0 +1,12 @@
+{
+  "id": "E1",
+  "question": "What is the baseline?",
+  "tabs": [
+    1
+  ],
+  "killRates": [
+    0
+  ],
+  "epochs": 5,
+  "seeds": 3
+}

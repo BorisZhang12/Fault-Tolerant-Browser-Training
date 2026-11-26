@@ -1,0 +1,15 @@
+{
+  "id": "E3",
+  "question": "Does training survive failures?",
+  "tabs": [
+    10
+  ],
+  "killRates": [
+    0,
+    0.1,
+    0.3,
+    0.5
+  ],
+  "epochs": 5,
+  "seeds": 3
+}

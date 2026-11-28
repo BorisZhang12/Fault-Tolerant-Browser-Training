@@ -1,8 +1,8 @@
 # Run logs (commit only runs used in the README with: git add -f runs/<id>)
 runs/*
 !runs/.gitkeep
-# Data
-data/
+# MNIST, downloaded by `make data` (root only: coordinator/internal/data is source)
+/data/
 *.idx*-ubyte*
 # Node
 node_modules/

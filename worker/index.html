@@ -1,10 +1,20 @@
 <!doctype html>
 <html lang="en">
-  <head><meta charset="UTF-8" /><title>Browser training worker</title></head>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Browser training worker</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 2rem; max-width: 60rem; }
+      pre { background: #f4f4f5; padding: 0.75rem; border-radius: 6px; overflow-x: auto; }
+      #log { max-height: 20rem; overflow-y: auto; }
+    </style>
+  </head>
   <body>
     <h1>Training worker</h1>
     <p>Keeping this tab open lends its GPU to the training run.</p>
     <pre id="status">starting…</pre>
+    <h2>Epochs</h2>
+    <pre id="log"></pre>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

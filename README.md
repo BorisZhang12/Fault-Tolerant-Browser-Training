@@ -4,7 +4,17 @@ Open a link, and your browser tab joins a training run on its own GPU through We
 
 Version 1 trains a small multilayer perceptron (784 → 128 → 10) on MNIST across many tabs, coordinated by one Go server, and measures how accuracy holds up as the failure rate rises.
 
-> **Status:** scaffolding. The coordinator's weight layout, binary wire format and aggregation math are implemented and tested; everything else is stubbed with `TODO(milestone N)` markers that match the [build plan](docs/design.md#two-week-timeline).
+> **Status:** milestone 2 of 8. A single tab trains MNIST end to end: the coordinator loads and shards
+> MNIST and serves it over HTTP, and the worker decodes shards, trains the model on its GPU and
+> evaluates on the test set. The weight layout, binary wire format and aggregation math are
+> implemented and tested too. What is left is stubbed with `TODO(milestone N)` markers that match the
+> [build plan](docs/design.md#two-week-timeline): the WebSocket protocol and state loop, leases and
+> heartbeats, the chaos harness, the experiments and the dashboard.
+>
+> Measured so far: **96.73% test accuracy after 5 epochs** (60,000 images per epoch, batch 32,
+> SGD 0.05), with the tensor count flat across epochs. That run used the CPU backend under Node
+> against a live coordinator, not a browser tab on WebGPU, so it stands for the data path, weight
+> layout and hyperparameters only. `worker/src/mnist.e2e.test.ts` reproduces it.
 
 ## How it works
 
@@ -19,7 +29,8 @@ The full design, with rejected alternatives and the failure matrix, is in [docs/
 
 ```text
 coordinator/          Go: state loop, leases, aggregation, eval, checkpoints
-  cmd/coordinator/    main.go, flags
+  cmd/coordinator/    main.go, flags, HTTP endpoints
+  cmd/fetch-mnist/    one-off MNIST download into data/
   internal/state/     Coordinator, Worker, Lease, Round; config; aggregation
   internal/protocol/  JSON messages, binary frame encode/decode
   internal/model/     flat weight layout (101,770 params), init
@@ -38,11 +49,16 @@ Requirements: Go 1.24+, Node 22+, Python 3.10+, and a browser with WebGPU (recen
 
 ```bash
 make install   # npm and pip dependencies
+make data      # download MNIST into data/ (47 MB, once)
 make test      # Go unit tests + worker tests
 make demo      # build everything and start the coordinator on :8080
 make experiment E=E3
 make plots
 ```
+
+Then open <http://localhost:8080> and the tab starts training. Until the coordinator protocol
+lands (milestone 3) the tab walks every shard itself; `?epochs=`, `?shards=`, `?slow=` (per-step
+delay, in ms) and `?worker=` (a label for the logs) control the run.
 
 ## Experiments
 
